@@ -19,7 +19,7 @@ class State(models.Model):
 
 class District(models.Model):
     name = models.CharField(max_length=100)
-    state = models.ForeignKey(State, on_delete=models.PROTECT)
+    state = models.ForeignKey(State, on_delete=models.PROTECT, null=True)
     link = models.URLField(blank=True, null=True)
 
     def __str__(self):
