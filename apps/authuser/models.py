@@ -25,7 +25,7 @@ class PoliticianDetail(models.Model):
     any_post = models.CharField(max_length=50, blank=True, null=True)
     associate_with_party = models.ForeignKey('system.Party', on_delete=models.PROTECT)
     education = models.CharField(max_length=100, choices=EDUCATION_CHOICES_TUPLE,
-                                 verbose_name='आप की शैक्षिक योय्गता : *')
+                                 verbose_name='आप की शैक्षिक योय्गता : *', null=True)
     source_of_income = models.CharField(max_length=60, choices=INCOME_SOURCE_CHOICES,
                                         verbose_name='आय का जरिया  (Income Source)', blank=True, null=True)
     good_thoughts = models.TextField(verbose_name='३ अच्छे सोच *')

@@ -14,6 +14,11 @@ class District(models.Model):
     def __str__(self):
         return self.name
 
+class State(models.Model):
+    name = models.CharField(max_length=70)
+    code = models.IntegerField()
+    url = models.URLField(blank=True, null=True)
+
 
 class Party(models.Model):
     name = models.CharField(max_length=100)
