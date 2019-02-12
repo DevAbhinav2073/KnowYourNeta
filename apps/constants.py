@@ -29,11 +29,11 @@ SPEAKING_PRESENTATION_SKILLS_CHOICES_TUPLE = (
 
 EDUCATION_CHOICES_TUPLE = (
     (None, 'None'),
-    ('<=10', ''),
-    ('12', ''),
-    ('Bachelor', ''),
-    ('Masters', ''),
-    ('Degree', ''),
+    ('<=10', '10 or less than 10'),
+    ('12', 'Intermediate'),
+    ('Bachelor', 'Bachelor'),
+    ('Masters', 'Masters'),
+    ('Degree', 'Degree'),
 )
 
 INCOME_SOURCE_CHOICES = (
