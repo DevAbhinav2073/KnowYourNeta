@@ -6,6 +6,29 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    .register_form{
+        min-width: 500px;
+        .form_register{
+            flex-flow: row wrap!important;
+            justify-content: space-between;
+            > input {
+                flex-basis: 100px;
+                flex-grow: 1;
+                margin: 10px;
+                padding: 0 8px;
+                border: 1px solid #ccd;
+                border-radius: 3px!important;
+            }
+            .email{
+                flex-grow: 0.31;
+            }
+            .button{
+                margin-top: 10px;
+                width: 100%;
+                padding: 5px;
+            }
+        }
+    }
     .login_form{
         width: 300px;
         padding: 20px;

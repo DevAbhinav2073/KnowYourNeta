@@ -5,7 +5,6 @@ from django.db import models
 from apps.constants import USER_TYPE_CHOICES_TUPLE, BOOLEAN_CHOICES, SPEAKING_PRESENTATION_SKILLS_CHOICES_TUPLE, \
     WRITING_RESEARCH_SKILLS_CHOICES_TUPLE, SOCIAL_MEDIA_INFORMATION_STATUS, EDUCATION_CHOICES_TUPLE, \
     INCOME_SOURCE_CHOICES
-from apps.system.models import District
 
 
 class Authuser(AbstractUser):
@@ -14,7 +13,7 @@ class Authuser(AbstractUser):
     address = models.CharField(max_length=100, null=True)
     party = models.ForeignKey('system.Party', on_delete=models.PROTECT, null=True)
     mobile_number = models.CharField(max_length=15, null=True)
-    district = models.ForeignKey(District, on_delete=models.PROTECT, null=True)
+    district = models.ForeignKey('system.District', on_delete=models.PROTECT, null=True)
     assembly_constituency_name = models.ForeignKey('system.AssemblyConstituencyName', on_delete=models.PROTECT,
                                                    null=True)
     user_type = models.CharField(max_length=40, choices=USER_TYPE_CHOICES_TUPLE, null=True)
@@ -58,3 +57,4 @@ class Supporter(models.Model):
     supporter_of = models.ForeignKey(Authuser, on_delete=models.PROTECT)
     name = models.CharField(max_length=60)
     phone_number = models.CharField(max_length=15)
+    constituency_name = models.ForeignKey('system.AssemblyConstituencyName', on_delete=models.PROTECT)

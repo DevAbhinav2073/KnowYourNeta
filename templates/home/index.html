@@ -1,161 +1,140 @@
 <!DOCTYPE html>
 {% load static %}
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>2०१९ लोकसभा में उत्तर प्रदेश की भूमिका</title>
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link rel="stylesheet" href="{% static '/custom_css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'custom_css/style.css'%}">
 </head>
 <body>
 <header id="header">
-    <div class="message">
-        Are you a candidate? <a href="{% url 'register' %}">Signup!</a>
-    </div>
+    <!--<div class="message">-->
+    <!--Are you a candidate? <a>Signup!</a>-->
+    <!--</div>-->
 </header>
 <section id="body">
     <div class="leaderboad_wrapper">
         <div class="section_header">
-            Leaderboard
+            
         </div>
         <div class="leaderboard_container">
+            {% for party in leading_parties %}
             <div class="leaderboard">
                 <div class="leaderboard_logo">
-                    <img src="" alt="leaderboard Logo">
+                    <img src="{{party.logo.url}}" alt="leaderboard Logo">
                 </div>
                 <div class="leaderboard_content">
                     <div class="leaderboard_name">
-                        Name
+                        {{party.name}}
+                        <br>
+                        Total vote: {{party.vote_count}}
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
     </div>
     <div class="form_container">
         <div class="form_wrapper">
-            <form class="form" action="">
-                <div class="text">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                    and scrambled it to make a type specimen book.
-                </div>
-                <div class="form_element_wrapper">
-                    <div class="element_name">
-                        Select Party :
-                    </div>
-                    <div class="element_input">
-                        <select name="selectParty" id="select">
-                            <option>
-                                Option 1
-                            </option>
-                            <option>
-                                Option 2
-                            </option>
-                            <option>
-                                Option 3
-                            </option>
-                            <option>
-                                Option 4
-                            </option>
-                            <option>
-                                Option 5
-                            </option>
-                        </select>
-                    </div>
-                </div>
-                <div class="select_your_neta">
-                    <div class="container_header">
-                        Select Your Neta
-                    </div>
-                    <div class="neta_input_form">
-                        <div class="form_element_wrapper">
-                            <div class="element_name">
-                                By Pin Code :
-                            </div>
-                            <div class="element_input">
-                                <input type="text" placeholder="Your Neta's Pin code" class="input">
+            <div class="text">
+
+
+                <img src="{% static 'images/indias-biggest-politician-latest.gif'%}">
+
+            </div>
+            <div class="wrapper">
+                <form class="form" method="post" action="{% url 'vote'%}">
+                    <div class="select_your_neta">
+                        <div class="container_header">
+                            Vote for your party:
+                        </div>
+                        <div class="neta_input_form">
+                            {% csrf_token %}
+                            {{form.as_p}}
+                            <div class="button">
+                                <button type="submit" name="button">Vote</button>
                             </div>
                         </div>
-                        <div class="form_element_wrapper">
-                            <div class="element_name">
-                                By district :
-                            </div>
-                            <div class="element_input">
-                                <select name="selectDistrict" id="select">
-                                    <option>
-                                        Option 1
-                                    </option>
-                                    <option>
-                                        Option 2
-                                    </option>
-                                    <option>
-                                        Option 3
-                                    </option>
-                                    <option>
-                                        Option 4
-                                    </option>
-                                    <option>
-                                        Option 5
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form_element_wrapper">
-                            <div class="element_name">
-                                By Party :
-                            </div>
-                            <div class="element_input">
-                                <select name="selectParty" id="select">
-                                    <option>
-                                        Option 1
-                                    </option>
-                                    <option>
-                                        Option 2
-                                    </option>
-                                    <option>
-                                        Option 3
-                                    </option>
-                                    <option>
-                                        Option 4
-                                    </option>
-                                    <option>
-                                        Option 5
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form_element_wrapper">
-                            <div class="element_name">
-                                By Name :
-                            </div>
-                            <div class="element_input">
-                                <input type="text" placeholder="Your Neta's Name" class="input">
-                            </div>
-                        </div>
-                        <div class="button">
-                            <button type="submit" name="button">Search</button>
-                        </div>
                     </div>
-                </div>
-            </form>
-            <div class="search_result">
-                <div class="neta_wrapper">
-                    <div class="neta_image">
-                        <img src="" alt="Neta's Image"></img>
-                    </div>
-                    <div class="neta_details">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s
-                    </div>
-                    <button class="button_vote"> Vote</button>
-                </div>
+                </form>
+                <!--<div class="search_result">-->
+                <!--<div class="neta_wrapper">-->
+                <!--<div class="neta_image">-->
+                <!--<img src="" alt="Neta's Image"></img>-->
+                <!--</div>-->
+                <!--<div class="neta_details">-->
+                <!--<div class="content_wrapper">-->
+                <!--<span>Name :</span> Abhinav Dev-->
+                <!--</div>-->
+                <!--<div class="content_wrapper">-->
+                <!--<span>Pin :</span> qwer123-->
+                <!--</div>-->
+                <!--<div class="content_wrapper">-->
+                <!--<span>Party :</span> Any Party-->
+                <!--</div>-->
+                <!--<div class="content_wrapper">-->
+                <!--<span>Phone Number :</span> 908324542345423-->
+                <!--</div>-->
+                <!--<div class="content_wrapper">-->
+                <!--<span>District :</span> Bihar-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<button class="button_vote"> Vote</button>-->
+                <!--</div>-->
+                <!--<div class="neta_wrapper">-->
+                <!--<div class="neta_image">-->
+                <!--<img src="" alt="Neta's Image"></img>-->
+                <!--</div>-->
+                <!--<div class="neta_details">-->
+                <!--<div class="content_wrapper">-->
+                <!--<span>Name :</span> Abhinav Dev-->
+                <!--</div>-->
+                <!--<div class="content_wrapper">-->
+                <!--<span>Pin :</span> qwer123-->
+                <!--</div>-->
+                <!--<div class="content_wrapper">-->
+                <!--<span>Party :</span> Any Party-->
+                <!--</div>-->
+                <!--<div class="content_wrapper">-->
+                <!--<span>Phone Number :</span> 908324542345423-->
+                <!--</div>-->
+                <!--<div class="content_wrapper">-->
+                <!--<span>District :</span> Bihar-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<button class="button_vote"> Vote</button>-->
+                <!--</div>-->
+                <!--<div class="neta_wrapper">-->
+                <!--<div class="neta_image">-->
+                <!--<img src="" alt="Neta's Image"></img>-->
+                <!--</div>-->
+                <!--<div class="neta_details">-->
+                <!--<div class="content_wrapper">-->
+                <!--<span>Name :</span> Abhinav Dev-->
+                <!--</div>-->
+                <!--<div class="content_wrapper">-->
+                <!--<span>Pin :</span> qwer123-->
+                <!--</div>-->
+                <!--<div class="content_wrapper">-->
+                <!--<span>Party :</span> Any Party-->
+                <!--</div>-->
+                <!--<div class="content_wrapper">-->
+                <!--<span>Phone Number :</span> 908324542345423-->
+                <!--</div>-->
+                <!--<div class="content_wrapper">-->
+                <!--<span>District :</span> Bihar-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<button class="button_vote"> Vote</button>-->
+                <!--</div>-->
+                <!--</div>-->
             </div>
         </div>
-        <div class="ad_space_area">
-            Ad Space
+        <div class="ad_space_area" align="center" style="padding:10px">
+            <font  color="green">{{message}}</font>
         </div>
     </div>
 </section>
