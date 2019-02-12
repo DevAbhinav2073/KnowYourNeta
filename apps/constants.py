@@ -45,3 +45,9 @@ INCOME_SOURCE_CHOICES = (
     ('Retired', 'Retired'),
 
 )
+
+RESERVED_FOR_CHOICES_TUPLE = (
+    ('SC', 'SC'),
+    ('ST', 'ST'),
+    (None, 'None'),
+)
