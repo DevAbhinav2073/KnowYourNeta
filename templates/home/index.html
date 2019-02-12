@@ -18,13 +18,15 @@
 <section id="body">
     <div class="leaderboad_wrapper">
         <div class="section_header">
-            
+
         </div>
         <div class="leaderboard_container">
             {% for party in leading_parties %}
             <div class="leaderboard">
                 <div class="leaderboard_logo">
+                    {% if party.logo.url %}
                     <img src="{{party.logo.url}}" alt="leaderboard Logo">
+                    {% endif %}
                 </div>
                 <div class="leaderboard_content">
                     <div class="leaderboard_name">
