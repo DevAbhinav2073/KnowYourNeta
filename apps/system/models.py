@@ -56,6 +56,6 @@ class Vote(models.Model):
     party = models.ForeignKey(Party, on_delete=models.PROTECT, related_name='vote', blank=True, null=True)
     assembly_constituency_name = models.ForeignKey(AssemblyConstituencyName, on_delete=models.PROTECT, blank=True,
                                                    null=True)
-
+    district = models.ForeignKey(District, on_delete=models.PROTECT)
     def __str__(self):
         return 'vote for : %s' % (self.vote_for,)
