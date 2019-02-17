@@ -14,13 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf import settings
+from django.conf.urls import url
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers
 
-from apps.system.views import HomeTemplateView, RegisterTemplateView, LoginTemplateView, CreateVoteView, \
-    SuccessHomePage, home_view, vote_a_member
+from apps.authuser.views import CreateUserView, Login
+from apps.system.views import RegisterTemplateView, LoginTemplateView, CreateVoteView, \
+    SuccessHomePage, home_view, vote_a_member, PoliticianDetailViewSet, SearchResultView, VoteAMember, AssemblyListView, \
+    ConstituencyListView, PartyListView
 
+router = routers.DefaultRouter()
+router.register(r'politician_data', PoliticianDetailViewSet, base_name='politician_detail')
 urlpatterns = [
 
                   path('admin/', admin.site.urls),
@@ -30,6 +36,18 @@ urlpatterns = [
                   path('login/', LoginTemplateView.as_view(), name='login'),
                   path('vote/', CreateVoteView.as_view(), name='vote'),
                   path('vote-member/<int:member_pk>/', vote_a_member, name='vote_member'),
+                  url(r'^api-auth/', include('rest_framework.urls')),
+
+                  url(r'^api/', include(router.urls)),
+
+                  url('api/signup/', CreateUserView.as_view(), name='create_user'),
+                  path('api/login/', Login.as_view(), name='login'),
+                  path('api/search/', SearchResultView.as_view(), name='search'),
+                  path('api/vote/', VoteAMember.as_view(), name='vote'),
+                  path('api/party/', PartyListView.as_view(), name='party'),
+                  path('api/constituency/', ConstituencyListView.as_view(), name='constituency'),
+                  path('api/assembly-segment/', AssemblyListView.as_view(), name='assembly_segments'),
+
               ] \
-              + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\
+              + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
               + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

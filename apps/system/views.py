@@ -1,15 +1,20 @@
 # Create your views here.
 from django.apps import apps
-from django.contrib.auth import get_user_model
 from django.db.models import Count
 from django.shortcuts import get_object_or_404, redirect
 from django.template.response import TemplateResponse
 from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, CreateView
+from rest_framework.generics import ListAPIView, CreateAPIView
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
 
+from apps.authuser.serializers import UserSerializer
+from apps.constants import USER_TYPE_POLITICIAN
 from apps.system.forms import NetaChoiceForm
-from apps.system.models import Vote
+from apps.system.serializers import *
 
 Party = apps.get_model('system', 'Party')
 
@@ -71,10 +76,9 @@ class CreateVoteView(CreateView):
     success_url = reverse_lazy('home-success')
 
 
-def home_view(request, show_result=False,*args, **kwargs):
+def home_view(request, show_result=False, *args, **kwargs):
     # report type choices are 'view-mjp', 'view-daily-working', 'view-final-claim'
     context = {}
-    print(args, kwargs, show_result)
     if request.method == 'GET':
         context['form'] = NetaChoiceForm
     else:
@@ -101,7 +105,6 @@ def vote_a_member(request, member_pk):
     Vote.objects.create(vote_for=member)
     if request.method == 'GET':
         return redirect('home')
-
     context = {}
     context['is_result'] = True
     context['form'] = NetaChoiceForm
@@ -112,3 +115,67 @@ def vote_a_member(request, member_pk):
         'home/index.html',
         context=context
     )
+
+
+class PoliticianDetailViewSet(ModelViewSet):
+    serializer_class = PoliticianDetailSerializer
+    queryset = PoliticianDetail.objects.all()
+
+    def create(self, request, *args, **kwargs):
+        user_pk = request.user.pk
+        self.request.data['detail_of'] = request.user.pk
+        if PoliticianDetail.objects.filter(id=user_pk).exists():
+            politician_detail = PoliticianDetail.objects.filter(id=user_pk)
+            politician_detail.update(**self.request.data)
+            politician_detail = politician_detail.get(pk=user_pk)
+        else:
+            serialized = PoliticianDetailSerializer(data=request.data)
+            if serialized.is_valid(raise_exception=True):
+                politician_detail = serialized.save()
+        return Response(PoliticianDetailSerializer(politician_detail).data)
+
+
+class SearchResultView(ListAPIView):
+    serializer_class = UserSerializer
+    queryset = User.objects.filter(user_type=USER_TYPE_POLITICIAN)
+
+    def get_queryset(self, **kwargs):
+        queryset = super().get_queryset()
+        if self.request.GET['party']:
+            queryset = queryset.filter(party=self.request.GET['party'])
+        if self.request.GET['constituency']:
+            queryset = queryset.filter(constituency=self.request.GET['constituency'])
+        return queryset
+
+
+class VoteAMember(CreateAPIView):
+    serializer_class = VoteSerializer
+    queryset = Vote.objects.all()
+    permission_classes = [AllowAny, ]
+
+
+class PartyListView(ListAPIView):
+    serializer_class = PartySerializer
+    queryset = Party.objects.all()
+    permission_classes = [AllowAny, ]
+
+
+class ConstituencyListView(ListAPIView):
+    serializer_class = ConstituencySerializer
+    queryset = Constituency.objects.all()
+    permission_classes = [AllowAny, ]
+
+
+
+class AssemblyListView(ListAPIView):
+    serializer_class = AssemblySegmentSerializer
+    queryset = AssemblySegment.objects.all()
+    permission_classes = [AllowAny, ]
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.request.GET.get('constituency', None):
+            queryset = queryset.filter(constituency=self.request.GET['constituency'])
+        if self.request.GET.get('constituency_number', None):
+            queryset = queryset.filter(constituency_number=self.request.GET['constituency_number'])
+        return queryset

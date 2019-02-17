@@ -7,9 +7,6 @@ from apps.constants import RESERVED_FOR_CHOICES_TUPLE
 User = get_user_model()
 
 
-class CandidateDetail(models.Model):
-    pass
-
 
 class State(models.Model):
     name = models.CharField(max_length=70)
@@ -19,9 +16,6 @@ class State(models.Model):
     def __str__(self):
         return self.name
 
-
-class District(models.Model):
-    pass
 
 
 class Constituency(models.Model):
@@ -52,10 +46,7 @@ class Party(models.Model):
         verbose_name_plural = 'Parties'
 
 
-# AssemblyConstituencyName
 
-class AssemblyConstituencyName(models.Model):
-    pass
 
 
 class AssemblySegment(models.Model):
