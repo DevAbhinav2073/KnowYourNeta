@@ -19,6 +19,12 @@ class SupporterInline(admin.StackedInline):
 
 class AuthuserAdmin(UserAdmin):
     inlines = (PoliticianDetailInline, SupporterInline)
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('first_name', 'last_name', 'username', 'password1', 'password2'),
+        }),
+    )
 
 
 admin.site.register(User, AuthuserAdmin)

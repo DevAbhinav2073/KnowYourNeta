@@ -1,0 +1,118 @@
+@media(max-width: 1200px){
+    body{
+        overflow: hidden;
+    }
+    #body{
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    #body .leaderboad_wrapper{
+        min-width: 250px;
+    }
+    #body .form_container{
+        padding-left: 20px;
+        display: block!important;
+        overflow: hidden;
+        overflow-y: auto;
+        &::-webkit-scrollbar{
+            display: none;
+        }
+        padding-bottom: 50px;
+    }
+    #body .form_container .form_wrapper .form{
+        background: #fafafa;
+        border: 1px solid #ccd;
+        border-radius: 3px;
+        padding: 20px 5px;
+        margin-bottom: 30px;
+    }
+    .search_result{
+        margin-top: 30px;
+        width: 100%;
+        padding-right: 10px;
+        &::-webkit-scrollbar{
+            width: 8px;
+            background: rgba(200, 200, 200, 0.8);
+        }
+        &::-webkit-scrollbar-thumb{
+            background: rgba(150, 150, 150, 0.9);
+        }
+    }
+}
+@media(max-width: 900px){
+    #body .form_container .form_wrapper .form{
+        margin: 0;
+        padding: 10px;
+        >*{
+            margin: 0;
+        }
+        .select_your_neta{
+            padding: 5px;
+            .neta_input_form{
+                > *{
+                    margin: 0;
+                    padding: 5px 0;
+                }
+            }
+        }
+    }
+    .form_element_wrapper .element_input{
+        width: 100%;
+    }
+    #select{
+        min-width: auto;
+        width: 100%;
+        margin: 0;
+    }
+    .input{
+        width: 100%;
+        margin: 0;
+    }
+}
+@media(max-width: 700px){
+    body{
+        overflow-y: auto;
+        height: auto;
+        &::-webkit-scrollbar{
+            display: none;
+        }
+    }
+    #body{
+        flex-direction: column;
+    }
+    #body .form_container{
+        margin-top: 30px;
+        padding-left: 0;
+        overflow-y: hidden;
+    }
+    .form_element_wrapper{
+        flex-direction: column;
+        align-items: flex-start;
+        .element_input{
+            margin: 0;
+            margin-top: 15px;
+        }
+        > *{
+            margin-left: 0;
+        }
+    }
+    #body .button{
+        margin-top: 20px!important;
+        button{
+            width: 100%;
+        }
+    }
+    .search_result{
+        min-width: 100px;
+        padding-right: 0;
+        &::-webkit-scrollbar{
+            display: none;
+        }
+    }
+    .search_result .neta_wrapper{
+        flex-direction: column;
+        .neta_details{
+            padding: 15px 5px;
+        }
+    }
+}

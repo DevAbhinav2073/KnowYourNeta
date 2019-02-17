@@ -23,6 +23,7 @@ html, body {
   left: 0;
   z-index: 1000;
 }
+
 #header .message {
   padding: 0 50px;
 }
