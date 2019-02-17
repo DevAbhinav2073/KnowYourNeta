@@ -38,7 +38,7 @@ class Constituency(models.Model):
 
 class Party(models.Model):
     name = models.CharField(max_length=100)
-    logo = models.ImageField(upload_to='uploads/logo/', null=True)
+    logo = models.ImageField(upload_to='uploads/logo/', null=True, blank=True)
     website = models.URLField(blank=True, null=True)
 
     def __str__(self):
