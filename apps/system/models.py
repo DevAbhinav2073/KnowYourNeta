@@ -48,6 +48,7 @@ class Party(models.Model):
         verbose_name = 'Party'
         verbose_name_plural = 'Parties'
 
+
 # AssemblyConstituencyName
 
 class AssemblyConstituencyName(models.Model):
@@ -59,7 +60,7 @@ class AssemblySegment(models.Model):
     number_of_electorates = models.IntegerField()
     constituency_number = models.CharField(max_length=100)
     reserved_for = models.CharField(choices=RESERVED_FOR_CHOICES_TUPLE, max_length=40, null=True, blank=True)
-    district = models.ForeignKey(Constituency, on_delete=models.PROTECT)
+    consituency = models.ForeignKey(Constituency, on_delete=models.PROTECT)
     link = models.URLField(blank=True, null=True)
 
     def __str__(self):
@@ -69,9 +70,10 @@ class AssemblySegment(models.Model):
 class Vote(models.Model):
     vote_for = models.ForeignKey(User, on_delete=models.PROTECT, blank=True, null=True)
     party = models.ForeignKey(Party, on_delete=models.PROTECT, related_name='vote', blank=True, null=True)
-    assembly_constituency_name = models.ForeignKey(AssemblySegment, on_delete=models.PROTECT, blank=True,
-                                                   null=True)
-    district = models.ForeignKey(Constituency, on_delete=models.PROTECT)
+    constituency_segment = models.ForeignKey(AssemblySegment, on_delete=models.PROTECT, blank=True,
+                                             null=True)
+    # constituency = models.ForeignKey(Constituency, on_delete=models.PROTECT)
+    constituency = models.ForeignKey(Constituency, null=True, related_name='votes', on_delete=models.PROTECT)
 
     def __str__(self):
         return 'vote for : %s' % (self.vote_for,)

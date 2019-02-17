@@ -47,5 +47,5 @@ class LoginTemplateView(TemplateView):
 
 class CreateVoteView(CreateView):
     model = Vote
-    fields = ['party', 'district']
+    fields = ['party', 'constituency']
     success_url = reverse_lazy('home-success')
