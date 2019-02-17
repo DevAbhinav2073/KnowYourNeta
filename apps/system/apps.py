@@ -2,4 +2,7 @@ from django.apps import AppConfig
 
 
 class SystemConfig(AppConfig):
-    name = 'system'
+    name = 'apps.system'
+
+    def ready(self):
+        import apps.system.signals

@@ -18,16 +18,18 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
-from apps.system.views import HomeTemplateView, RegisterTemplateView, LoginTemplateView, CreateVoteView, SuccessHomePage
+from apps.system.views import HomeTemplateView, RegisterTemplateView, LoginTemplateView, CreateVoteView, \
+    SuccessHomePage, home_view, vote_a_member
 
 urlpatterns = [
 
                   path('admin/', admin.site.urls),
-                  path('', HomeTemplateView.as_view(), name='home'),
+                  path('', home_view, name='home'),
                   path('success/', SuccessHomePage.as_view(), name='home-success'),
                   path('register/', RegisterTemplateView.as_view(), name='register'),
                   path('login/', LoginTemplateView.as_view(), name='login'),
                   path('vote/', CreateVoteView.as_view(), name='vote'),
+                  path('vote-member/<int:member_pk>/', vote_a_member, name='vote_member'),
               ] \
               + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\
               + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

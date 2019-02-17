@@ -4,10 +4,8 @@ from apps.system.models import Constituency, Party, Vote
 
 
 class NetaChoiceForm(forms.Form):
-    party = forms.ModelChoiceField(queryset=Party.objects.all(), required=True)
-    postal_code = forms.CharField(max_length=30, required=False)
-    constituency = forms.ModelChoiceField(queryset=Constituency.objects.all(), required=True)
-    name = forms.CharField(max_length=60, required=False)
+    party = forms.ModelChoiceField(queryset=Party.objects.all(), label='Select Party', required=True)
+    constituency = forms.ModelChoiceField(queryset=Constituency.objects.all(), label='Select Lok Sabha', required=True)
 
 
 class VoteForm(forms.ModelForm):

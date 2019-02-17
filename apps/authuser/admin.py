@@ -22,7 +22,9 @@ class AuthuserAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('first_name', 'last_name', 'username', 'password1', 'password2'),
+            'fields': (
+                'first_name', 'last_name', 'fathers_name', 'date_of_birth', 'address', 'party', 'constituency', 'mobile_number', 'age',
+                'user_type', 'username', 'password1', 'password2'),
         }),
     )
 
