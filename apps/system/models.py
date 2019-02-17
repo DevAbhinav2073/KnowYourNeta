@@ -31,6 +31,10 @@ class Constituency(models.Model):
     link = models.URLField(blank=True, null=True)
     reserved_for = models.CharField(choices=RESERVED_FOR_CHOICES_TUPLE, max_length=40, null=True, blank=True)
 
+    class Meta:
+        verbose_name = 'Constituency'
+        verbose_name_plural = 'Constituencies'
+
 
 class Party(models.Model):
     name = models.CharField(max_length=100)
@@ -40,6 +44,9 @@ class Party(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Party'
+        verbose_name_plural = 'Parties'
 
 # AssemblyConstituencyName
 
