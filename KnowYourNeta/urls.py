@@ -27,6 +27,9 @@ from apps.system.views import RegisterTemplateView, LoginTemplateView, CreateVot
 
 router = routers.DefaultRouter()
 router.register(r'politician_data', PoliticianDetailViewSet, base_name='politician_detail')
+router.register(r'party', PartyListView, base_name='party')
+router.register(r'constituency', ConstituencyListView, base_name='constituency')
+router.register(r'assembly-segment', AssemblyListView, base_name='assembly_segment')
 urlpatterns = [
 
                   path('admin/', admin.site.urls),
@@ -44,9 +47,6 @@ urlpatterns = [
                   path('api/login/', Login.as_view(), name='login'),
                   path('api/search/', SearchResultView.as_view(), name='search'),
                   path('api/vote/', VoteAMember.as_view(), name='vote'),
-                  path('api/party/', PartyListView.as_view(), name='party'),
-                  path('api/constituency/', ConstituencyListView.as_view(), name='constituency'),
-                  path('api/assembly-segment/', AssemblyListView.as_view(), name='assembly_segments'),
 
               ] \
               + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \

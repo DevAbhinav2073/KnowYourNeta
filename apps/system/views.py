@@ -154,23 +154,21 @@ class VoteAMember(CreateAPIView):
     permission_classes = [AllowAny, ]
 
 
-class PartyListView(ListAPIView):
+class PartyListView(ModelViewSet):
     serializer_class = PartySerializer
     queryset = Party.objects.all()
     permission_classes = [AllowAny, ]
 
 
-class ConstituencyListView(ListAPIView):
+class ConstituencyListView(ModelViewSet):
     serializer_class = ConstituencySerializer
     queryset = Constituency.objects.all()
-    permission_classes = [AllowAny, ]
 
 
 
-class AssemblyListView(ListAPIView):
+class AssemblyListView(ModelViewSet):
     serializer_class = AssemblySegmentSerializer
     queryset = AssemblySegment.objects.all()
-    permission_classes = [AllowAny, ]
 
     def get_queryset(self):
         queryset = super().get_queryset()

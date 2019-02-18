@@ -10,6 +10,16 @@ User = get_user_model()
 class UserSerializer(DynamicFieldsModelSerializer):
     token = serializers.SerializerMethodField()
     full_name = serializers.SerializerMethodField()
+    party_name = serializers.SerializerMethodField()
+    constituency_name = serializers.SerializerMethodField
+
+    def get_party_name(self, obj):
+        if obj.party is not None:
+            return obj.party.name
+
+    def get_constituency_name(self, obj):
+        if obj.constituency is not None:
+            return obj.constituency.name
 
     def get_token(self, obj):
         obj, created = Token.objects.get_or_create(user=obj)
@@ -20,7 +30,7 @@ class UserSerializer(DynamicFieldsModelSerializer):
 
     def create(self, validated_data):
         user = User.objects.create(
-            username=validated_data['username']
+              username=validated_data['username']
             , email=validated_data.get('email')
             , first_name=validated_data['first_name']
             , last_name=validated_data['last_name']
@@ -42,5 +52,6 @@ class UserSerializer(DynamicFieldsModelSerializer):
     class Meta:
         fields = (
             'id', 'username', 'password', 'email', 'mobile_number', 'first_name', 'last_name', 'full_name', 'token',
-            'user_type', 'fathers_name', 'date_of_birth', 'address', 'age', 'party', 'constituency', 'photo', 'assembly_segment')
+            'user_type', 'fathers_name', 'date_of_birth', 'address', 'age', 'party', 'constituency', 'photo',
+            'assembly_segment')
         model = User
