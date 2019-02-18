@@ -177,3 +177,11 @@ class AssemblyListView(ModelViewSet):
         if self.request.GET.get('constituency_number', None):
             queryset = queryset.filter(constituency_number=self.request.GET['constituency_number'])
         return queryset
+
+
+class LeaderboardListView(ListAPIView):
+    serializer_class = PartySerializer
+    queryset = Party.objects.all()
+
+    def get_queryset(self):
+        return get_leading_party_queryset()

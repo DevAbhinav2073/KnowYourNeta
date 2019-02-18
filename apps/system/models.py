@@ -7,7 +7,6 @@ from apps.constants import RESERVED_FOR_CHOICES_TUPLE
 User = get_user_model()
 
 
-
 class State(models.Model):
     name = models.CharField(max_length=70)
     code = models.IntegerField()
@@ -15,7 +14,6 @@ class State(models.Model):
 
     def __str__(self):
         return self.name
-
 
 
 class Constituency(models.Model):
@@ -29,9 +27,9 @@ class Constituency(models.Model):
         verbose_name = 'Constituency'
         verbose_name_plural = 'Constituencies'
 
-
     def __str__(self):
         return self.name
+
 
 class Party(models.Model):
     name = models.CharField(max_length=100)
@@ -41,12 +39,13 @@ class Party(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def total_votes(self):
+        return self.vote.all().count()
+
     class Meta:
         verbose_name = 'Party'
         verbose_name_plural = 'Parties'
-
-
-
 
 
 class AssemblySegment(models.Model):
@@ -66,8 +65,8 @@ class Vote(models.Model):
     party = models.ForeignKey(Party, on_delete=models.PROTECT, related_name='vote', blank=True, null=True)
     constituency_segment = models.ForeignKey(AssemblySegment, on_delete=models.PROTECT, blank=True,
                                              null=True)
-    constituency = models.ForeignKey(Constituency, null=True, blank=True, related_name='votes', on_delete=models.PROTECT)
-
+    constituency = models.ForeignKey(Constituency, null=True, blank=True, related_name='votes',
+                                     on_delete=models.PROTECT)
 
     def __str__(self):
         return 'vote for : %s' % (self.vote_for,)

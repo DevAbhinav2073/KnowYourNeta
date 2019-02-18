@@ -17,6 +17,11 @@ class VoteSerializer(serializers.ModelSerializer):
 
 
 class PartySerializer(serializers.ModelSerializer):
+    total_votes = serializers.SerializerMethodField()
+
+    def get_total_votes(self, obj):
+        return obj.total_votes
+
     class Meta:
         model = Party
         fields = '__all__'
