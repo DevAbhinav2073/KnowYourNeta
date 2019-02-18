@@ -30,7 +30,7 @@ class UserSerializer(DynamicFieldsModelSerializer):
 
     def create(self, validated_data):
         user = User.objects.create(
-              username=validated_data['username']
+            username=validated_data['username']
             , email=validated_data.get('email')
             , first_name=validated_data['first_name']
             , last_name=validated_data['last_name']
@@ -52,6 +52,7 @@ class UserSerializer(DynamicFieldsModelSerializer):
     class Meta:
         fields = (
             'id', 'username', 'password', 'email', 'mobile_number', 'first_name', 'last_name', 'full_name', 'token',
-            'user_type', 'fathers_name', 'date_of_birth', 'address', 'age', 'party', 'constituency', 'photo',
+            'user_type', 'fathers_name', 'date_of_birth', 'address', 'age', 'party', 'constituency', 'party_name',
+            'constituency_name', 'photo',
             'assembly_segment')
         model = User
