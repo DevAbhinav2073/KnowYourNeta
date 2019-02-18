@@ -11,7 +11,7 @@ class UserSerializer(DynamicFieldsModelSerializer):
     token = serializers.SerializerMethodField()
     full_name = serializers.SerializerMethodField()
     party_name = serializers.SerializerMethodField()
-    constituency_name = serializers.SerializerMethodField
+    constituency_name = serializers.SerializerMethodField()
 
     def get_party_name(self, obj):
         if obj.party is not None:
