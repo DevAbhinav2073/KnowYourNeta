@@ -160,10 +160,15 @@ class PartyListView(ModelViewSet):
     permission_classes = [AllowAny, ]
 
 
+class DistrictListView(ModelViewSet):
+    serializer_class = DistrictSerializer
+    queryset = District.objects.all()
+    permission_classes = [AllowAny, ]
+
+
 class ConstituencyListView(ModelViewSet):
     serializer_class = ConstituencySerializer
     queryset = Constituency.objects.all()
-
 
 
 class AssemblyListView(ModelViewSet):

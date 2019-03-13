@@ -16,6 +16,11 @@ class State(models.Model):
         return self.name
 
 
+class District(models.Model):
+    name = models.CharField(max_length=100)
+    state = models.ForeignKey(State, on_delete=models.CASCADE)
+
+
 class Constituency(models.Model):
     name = models.CharField(max_length=100)
     code = models.IntegerField()

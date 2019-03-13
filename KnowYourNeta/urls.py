@@ -23,13 +23,14 @@ from rest_framework import routers
 from apps.authuser.views import CreateUserView, Login
 from apps.system.views import RegisterTemplateView, LoginTemplateView, CreateVoteView, \
     SuccessHomePage, home_view, vote_a_member, PoliticianDetailViewSet, SearchResultView, VoteAMember, AssemblyListView, \
-    ConstituencyListView, PartyListView, LeaderboardListView
+    ConstituencyListView, PartyListView, LeaderboardListView, DistrictListView
 
 router = routers.DefaultRouter()
 router.register(r'politician_data', PoliticianDetailViewSet, base_name='politician_detail')
 router.register(r'party', PartyListView, base_name='party')
 router.register(r'constituency', ConstituencyListView, base_name='constituency')
 router.register(r'assembly-segment', AssemblyListView, base_name='assembly_segment')
+router.register(r'district', DistrictListView, base_name='district')
 urlpatterns = [
 
                   path('admin/', admin.site.urls),
