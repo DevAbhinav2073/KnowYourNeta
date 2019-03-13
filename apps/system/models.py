@@ -19,12 +19,13 @@ class State(models.Model):
 class District(models.Model):
     name = models.CharField(max_length=100)
     state = models.ForeignKey(State, on_delete=models.CASCADE)
+    code = models.IntegerField(blank=True, null=True)
 
 
 class Constituency(models.Model):
     name = models.CharField(max_length=100)
     code = models.IntegerField()
-    state = models.ForeignKey(State, on_delete=models.PROTECT, null=True)
+    district = models.ForeignKey(District, on_delete=models.PROTECT, null=True)
     link = models.URLField(blank=True, null=True)
     reserved_for = models.CharField(choices=RESERVED_FOR_CHOICES_TUPLE, max_length=40, null=True, blank=True)
 
