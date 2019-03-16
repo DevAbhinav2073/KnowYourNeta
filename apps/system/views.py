@@ -190,3 +190,15 @@ class LeaderboardListView(ListAPIView):
 
     def get_queryset(self):
         return get_leading_party_queryset()
+
+
+class MessageListAPIView(ListAPIView):
+    serializer_class = MessageSerializer
+    queryset = Message.objects.all()
+
+    def get_queryset(self):
+        message_type = self.request.GET.get('message_type', None)
+        if message_type is not None:
+            return super().get_queryset().filter(message_type=message_type)
+        else:
+            return super().get_queryset()

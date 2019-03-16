@@ -32,7 +32,12 @@ class DistrictAdmin(admin.ModelAdmin):
     list_display = [field.name for field in District._meta.fields]
 
 
+class MessageAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in Message._meta.fields]
+
+
 admin.site.register(Party, PartyAdmin)
+admin.site.register(Message, MessageAdmin)
 admin.site.register(AssemblySegment, AssemblySegmentAdmin)
 admin.site.register(Constituency, ConstituencyAdmin)
 admin.site.register(State, StateAdmin)

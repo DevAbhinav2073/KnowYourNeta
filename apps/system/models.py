@@ -83,3 +83,11 @@ class Vote(models.Model):
 
 class Post(models.Model):
     name = models.CharField(max_length=60)
+
+
+class Message(models.Model):
+    message_text = models.TextField()
+    message_type = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.message_text
