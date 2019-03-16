@@ -21,7 +21,7 @@ class Authuser(AbstractUser):
 
 
 class PoliticianDetail(models.Model):
-    detail_of = models.ForeignKey(Authuser, blank=False, on_delete=models.CASCADE)
+    detail_of = models.OneToOneField(Authuser, related_name='politician_detail', blank=False, on_delete=models.CASCADE)
     any_post = models.ForeignKey('system.Post', on_delete=models.PROTECT, blank=True, null=True)
     education = models.CharField(max_length=100, choices=EDUCATION_CHOICES_TUPLE,
                                  verbose_name='आप की शैक्षिक योय्गता :', null=True, blank=True)

@@ -23,7 +23,7 @@ from rest_framework import routers
 from apps.authuser.views import CreateUserView, Login
 from apps.system.views import RegisterTemplateView, LoginTemplateView, CreateVoteView, \
     SuccessHomePage, home_view, vote_a_member, PoliticianDetailViewSet, SearchResultView, VoteAMember, AssemblyListView, \
-    ConstituencyListView, PartyListView, LeaderboardListView, DistrictListView, MessageListAPIView
+    ConstituencyListView, PartyListView, LeaderboardListView, DistrictListView, GetUserDetailView, MessageListAPIView
 
 router = routers.DefaultRouter()
 router.register(r'politician_data', PoliticianDetailViewSet, base_name='politician_detail')
@@ -50,6 +50,7 @@ urlpatterns = [
                   path('api/vote/', VoteAMember.as_view(), name='vote'),
                   path('api/leaderboard/', LeaderboardListView.as_view(), name='vote'),
                   path('api/message', MessageListAPIView.as_view(), name='message'),
+                  path('api/get-user-detail/<str:username>', GetUserDetailView.as_view(), name='message'),
 
               ] \
               + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \

@@ -9,6 +9,7 @@ from django.views.generic import TemplateView, CreateView
 from rest_framework.generics import ListAPIView, CreateAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
 from apps.authuser.serializers import UserSerializer
@@ -196,9 +197,18 @@ class MessageListAPIView(ListAPIView):
     serializer_class = MessageSerializer
     queryset = Message.objects.all()
 
-    def get_queryset(self):
+    def get_queryset(self, **kwargs):
         message_type = self.request.GET.get('message_type', None)
         if message_type is not None:
-            return super().get_queryset().filter(message_type=message_type)
+            return super().get_queryset(kwargs).filter(message_type=message_type)
         else:
-            return super().get_queryset()
+            return super().get_queryset(kwargs)
+
+
+class GetUserDetailView(APIView):
+    queryset = User.objects.none()
+
+    def get(self, request, *args, **kwargs):
+        username = kwargs.pop('username')
+        user = get_object_or_404(User, username=username)
+        return Response(UserSerializer(user).data)

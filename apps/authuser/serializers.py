@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
+from apps.authuser.models import PoliticianDetail
 from apps.utils import DynamicFieldsModelSerializer
 
 User = get_user_model()
@@ -12,6 +13,11 @@ class UserSerializer(DynamicFieldsModelSerializer):
     full_name = serializers.SerializerMethodField()
     party_name = serializers.SerializerMethodField()
     constituency_name = serializers.SerializerMethodField()
+    politician_detail = serializers.SerializerMethodField()
+
+    def get_politician_detail(self, obj):
+        if obj.politician_detail is not None:
+            return PoliticianDetailSerializer(obj.politician_detail).data
 
     def get_party_name(self, obj):
         if obj.party is not None:
@@ -54,5 +60,11 @@ class UserSerializer(DynamicFieldsModelSerializer):
             'id', 'username', 'password', 'email', 'mobile_number', 'first_name', 'last_name', 'full_name', 'token',
             'user_type', 'fathers_name', 'date_of_birth', 'address', 'age', 'party', 'constituency', 'party_name',
             'constituency_name', 'photo',
-            'assembly_segment')
+            'assembly_segment', 'politician_detail')
         model = User
+
+
+class PoliticianDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PoliticianDetail
+        fields = '__all__'
