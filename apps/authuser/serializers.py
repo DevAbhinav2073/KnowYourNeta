@@ -16,8 +16,11 @@ class UserSerializer(DynamicFieldsModelSerializer):
     politician_detail = serializers.SerializerMethodField()
 
     def get_politician_detail(self, obj):
-        if obj.politician_detail is not None:
-            return PoliticianDetailSerializer(obj.politician_detail).data
+        try:
+            if obj.politician_detail is not None:
+                return PoliticianDetailSerializer(obj.politician_detail).data
+        except:
+            return None
 
     def get_party_name(self, obj):
         if obj.party is not None:
