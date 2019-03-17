@@ -212,3 +212,12 @@ class GetUserDetailView(APIView):
         username = kwargs.pop('username')
         user = get_object_or_404(User, username=username)
         return Response(UserSerializer(user).data)
+
+
+class GetUserDetailViewWithID(APIView):
+    queryset = User.objects.none()
+
+    def get(self, request, *args, **kwargs):
+        user_id = kwargs.pop('user_id')
+        user = get_object_or_404(User, id=user_id)
+        return Response(UserSerializer(user).data)
