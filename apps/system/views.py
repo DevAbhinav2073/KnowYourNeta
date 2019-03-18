@@ -129,7 +129,7 @@ class PoliticianDetailViewSet(ModelViewSet):
         if PoliticianDetail.objects.filter(detail_of=user_pk).exists():
             politician_detail = PoliticianDetail.objects.filter(detail_of=user_pk)
             politician_detail.update(**self.request.data)
-            politician_detail = politician_detail.get(pk=user_pk)
+            politician_detail = politician_detail.get(detail_of=user_pk)
         else:
             serialized = PoliticianDetailSerializer(data=request.data)
             if serialized.is_valid(raise_exception=True):
