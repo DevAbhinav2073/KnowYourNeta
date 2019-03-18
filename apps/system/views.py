@@ -222,3 +222,8 @@ class GetUserDetailViewWithID(APIView):
         user_id = kwargs.pop('user_id')
         user = get_object_or_404(User, id=user_id)
         return Response(UserSerializer(user).data)
+
+
+class AllPoliticianListView(ListAPIView):
+    queryset = User.objects.filter(user_type=USER_TYPE_POLITICIAN)
+    serializer_class = UserSerializer

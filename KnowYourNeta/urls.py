@@ -24,7 +24,7 @@ from apps.authuser.views import CreateUserView, Login
 from apps.system.views import RegisterTemplateView, LoginTemplateView, CreateVoteView, \
     SuccessHomePage, home_view, vote_a_member, PoliticianDetailViewSet, SearchResultView, VoteAMember, AssemblyListView, \
     ConstituencyListView, PartyListView, LeaderboardListView, DistrictListView, GetUserDetailView, MessageListAPIView, \
-    GetUserDetailViewWithID
+    GetUserDetailViewWithID, AllPoliticianListView
 
 router = routers.DefaultRouter()
 router.register(r'politician_data', PoliticianDetailViewSet, base_name='politician_detail')
@@ -50,6 +50,7 @@ urlpatterns = [
                   path('api/search/', SearchResultView.as_view(), name='search'),
                   path('api/vote/', VoteAMember.as_view(), name='vote'),
                   path('api/leaderboard/', LeaderboardListView.as_view(), name='vote'),
+                  path('api/all-politician/', AllPoliticianListView.as_view(), name='all_politician'),
                   path('api/message', MessageListAPIView.as_view(), name='message'),
                   path('api/get-user-detail-by-username/<str:username>', GetUserDetailView.as_view(),
                        name='user_detail'),
