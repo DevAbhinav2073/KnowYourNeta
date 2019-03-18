@@ -32,7 +32,7 @@ class PoliticianDetail(models.Model):
     how_can_you_help = models.TextField(verbose_name='आप कैसे मदत कर सकते है ………………….. को मजबूत करने में *', blank=True,
                                         null=True)
     why_people_like_you = models.TextField(verbose_name='आप ……………………. को क्यों पसंद करते है ? *', blank=True, null=True)
-    is_politics_effected_by_social_media = models.BooleanField(choices=BOOLEAN_CHOICES,
+    is_politics_affected_by_social_media = models.BooleanField(choices=BOOLEAN_CHOICES,
                                                                verbose_name='क्या भारत की राजनीती में सोशल मीडिया की बहुत प्रभावी भूमिका रही है ? *',
                                                                blank=True, null=True)
     social_media_information = models.CharField(choices=SOCIAL_MEDIA_INFORMATION_STATUS, max_length=50, blank=True,

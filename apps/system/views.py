@@ -126,8 +126,8 @@ class PoliticianDetailViewSet(ModelViewSet):
     def create(self, request, *args, **kwargs):
         user_pk = request.user.pk
         self.request.data['detail_of'] = request.user.pk
-        if PoliticianDetail.objects.filter(id=user_pk).exists():
-            politician_detail = PoliticianDetail.objects.filter(id=user_pk)
+        if PoliticianDetail.objects.filter(detail_of=user_pk).exists():
+            politician_detail = PoliticianDetail.objects.filter(detail_of=user_pk)
             politician_detail.update(**self.request.data)
             politician_detail = politician_detail.get(pk=user_pk)
         else:
