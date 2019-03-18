@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, CreateView
 from rest_framework.generics import ListAPIView, CreateAPIView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
@@ -121,6 +121,7 @@ def vote_a_member(request, member_pk):
 class PoliticianDetailViewSet(ModelViewSet):
     serializer_class = PoliticianDetailSerializer
     queryset = PoliticianDetail.objects.all()
+    permission_classes = [IsAuthenticated, ]
 
     def create(self, request, *args, **kwargs):
         user_pk = request.user.pk
