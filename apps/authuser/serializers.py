@@ -68,6 +68,12 @@ class UserSerializer(DynamicFieldsModelSerializer):
 
 
 class PoliticianDetailSerializer(serializers.ModelSerializer):
+    post_name = serializers.SerializerMethodField()
+
+    def get_post_name(self, obj):
+        if obj.any_post is not None:
+            return obj.any_post.name
+
     class Meta:
         model = PoliticianDetail
         fields = '__all__'

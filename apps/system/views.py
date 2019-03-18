@@ -227,3 +227,8 @@ class GetUserDetailViewWithID(APIView):
 class AllPoliticianListView(ListAPIView):
     queryset = User.objects.filter(user_type=USER_TYPE_POLITICIAN)
     serializer_class = UserSerializer
+
+
+class PostViewSet(ModelViewSet):
+    serializer_class = PostSerializer
+    queryset = Post.objects.all()
