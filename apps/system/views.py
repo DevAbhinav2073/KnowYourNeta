@@ -201,9 +201,9 @@ class MessageListAPIView(ListAPIView):
     def get_queryset(self, **kwargs):
         message_type = self.request.GET.get('message_type', None)
         if message_type is not None:
-            return super().get_queryset(kwargs).filter(message_type=message_type)
+            return super().get_queryset().filter(message_type=message_type)
         else:
-            return super().get_queryset(kwargs)
+            return super().get_queryset()
 
 
 class GetUserDetailView(APIView):
